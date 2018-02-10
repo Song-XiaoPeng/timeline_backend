@@ -35,6 +35,10 @@
                     <p>Welcome to your iView app!</p>
                     <Button type="ghost" @click="handleStart">Start iView</Button>
                 </h2>
+                <h2>
+                    <p>click sone</p>
+                    <router-link :to="{ name: 'sone', params: {} }">sone</router-link>
+                </h2>
             </Col>
         </Row>
     </div>
