@@ -1,7 +1,7 @@
 <template>
   <div class="">
-    <Table height="400" border stripe :columns="columns" :data="timelineList"></Table>
-    <Page show-total show-elevator :total="totalPage" :page-size="15" @on-change="pageChange" :current="currentPage"></Page>
+    <Table border stripe :columns="columns" :data="timelineList"></Table>
+    <Page show-total show-elevator :total="totalPage" :page-size=Number(pageSize) @on-change="pageChange" :current="currentPage" style="margin-top:20px"></Page>
     <!-- <sone>click me</sone> -->
   </div>
 </template>
@@ -13,7 +13,7 @@
             return {
                 totalPage:0,
                 currentPage:1,
-                pageSize: 15,
+                pageSize: 6,
                 loading:true,
                 timelineList:[],
                 columns:[]
@@ -62,9 +62,10 @@
             let that = this
             ajax.getTimelineList({
               data:{
-                page: that.currentPage
+                page: that.currentPage,
+                page_size: that.pageSize
               },
-              success:function(res){
+              success: function(res) {
                 that.timelineList = res.data
                 that.totalPage = res.total
                 that.pageSize = res.per_page
@@ -103,7 +104,9 @@
                           },
                           on: {
                             click: () => {
-                              that.getTimelineDetail(that.timelineList[index].id)
+                              // that.$router.push({ name: 'setTimeline', params: { id: 1 }}) //带params /index/:id
+                              that.$router.push({ name: 'setTimeline', query: { id: 1 }}) //带查询参数 /index?id=1
+                              // that.getTimelineDetail(that.timelineList[index].id)
                             }
                           }
                         },'详情'),

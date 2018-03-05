@@ -29,15 +29,18 @@ const routers = [
           meta: {
             title: 'timeline'
           },
-          component:  (resolve) => require(['./views/timeline/index.vue'], resolve)
+          component:  (resolve) => require(['./views/timeline/index.vue'], resolve),
+          children: [
+            
+          ]
         },
         {
-          path: 'detail',
-          name: 'detail',
+          path: 'setTimeline',
+          name: 'setTimeline',
           meta: {
-            title: 'detail'
+            title: 'setTimeline'
           },
-          component: (resolve) => require(['./views/timeline/detail.vue'], resolve)
+          component:  (resolve) => require(['./views/timeline/detail.vue'], resolve)
         }
       ]
     }

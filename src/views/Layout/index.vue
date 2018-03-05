@@ -33,31 +33,17 @@
     <div class="layout">
         <Layout :style="{minHeight: '100vh'}">
             <Sider collapsible :collapsed-width="78" v-model="isCollapsed">
-                <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses">
-                    <MenuItem name="1-1">
-                        <Icon type="ios-navigate"></Icon>
-                        <span>Option 1</span>
-                    </MenuItem>
-                    <MenuItem name="1-2">
-                        <Icon type="search"></Icon>
-                        <span>Option 2</span>
-                    </MenuItem>
-                    <MenuItem name="1-3">
-                        <Icon type="settings"></Icon>
-                        <span>Option 3</span>
-                    </MenuItem>
-                </Menu>
+                <div><h2 style="color:red;text-align:center;line-height:64px;height:64px;background-color:blue;">@sone时光机后台</h2></div>
+                <myMenu :class="menuitemClasses" mywidth="auto" :activitymenu="activityName"></myMenu>
             </Sider>
             <Layout>
                 <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}"></Header>
                 <Content :style="{padding: '0 16px 16px'}">
                     <Breadcrumb :style="{margin: '16px 0'}">
-                        <BreadcrumbItem>Home</BreadcrumbItem>
-                        <BreadcrumbItem>Components</BreadcrumbItem>
-                        <BreadcrumbItem>Layout</BreadcrumbItem>
+                        <BreadcrumbItem v-for="(item,key) in breadcrumb" :key="key">{{item}}</BreadcrumbItem>
                     </Breadcrumb>
                     <Card>
-                        <div style="height: 600px">
+                        <div style="">
                           <router-view></router-view>
                         </div>
                     </Card>
@@ -67,11 +53,36 @@
     </div>
 </template>
 <script>
+    import myMenu  from './components/menu'
+    import bus from 'api/bus'
+    import {menu as menuData} from 'config/menu'
+
     export default {
         data () {
             return {
-                isCollapsed: false
+                isCollapsed: false,
+                breadcrumb:[],
+                activityName: 0,
+                menuData
             };
+        },
+        beforeRouteUpdate (to,from,next){
+            next()
+        } ,
+        methods :{
+            initmenu() {
+                let url = window.location.pathname
+                for(let i=0;i<this.menuData.length;i++){
+                    if(this.menuData[i].route == url){
+                        this.activityName = i
+                        this.breadcrumb = this.menuData[i]['breadcrumb']
+                        break
+                    }
+                }
+            }
+        },
+        components:{
+            myMenu
         },
         computed: {
             menuitemClasses: function () {
@@ -80,6 +91,15 @@
                     this.isCollapsed ? 'collapsed-menu' : ''
                 ]
             }
+        },
+        created(){
+            this.initmenu();
+        },
+        mounted() {
+            let that = this
+            bus.$on('getBreadcrumb',function(name){                
+                that.breadcrumb = name
+            })
         }
     }
 </script>
