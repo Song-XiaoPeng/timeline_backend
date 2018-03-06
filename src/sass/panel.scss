@@ -1,0 +1,119 @@
+@import 'variables';
+
+#panel {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+#area {
+  width: 108px;
+  height: 100%;
+  flex: none;
+  width: whatever;
+}
+
+#content {
+  min-width: 1260px;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  overflow-y: scroll;
+}
+
+.layout-menu-left {
+  width: 100%;
+  background: #222;
+}
+
+.ivu-menu-vertical .ivu-menu-item {
+  padding: 8px 17px;
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+  transition: all .2s ease-in-out;
+  text-align: center;
+}
+
+.layout-menu-left-son {
+  width: 100%;
+  background: #fff;
+  border-right: 2px solid #e5e5e5;
+
+  .son-title {
+    text-align: center;
+    padding: 10px 5px 10px 5px;
+    border-bottom: 2px solid #e5e5e5;
+    height: 50px;
+    line-height: 31px;
+    cursor: pointer;
+  }
+
+  .ivu-menu-dark {
+    width: 100%;
+    height: 45px;
+    background: #fff;
+  }
+
+  .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title {
+    color: #666;
+  }
+
+  .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu) {
+    background: #f2f2f2;
+    color: #666!important;
+  }
+
+  .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item:hover {
+    background: #f2f2f2;
+    color: #666!important;
+  }
+}
+
+.layout-logo-left {
+  width: 45px;
+  height: 45px;
+  background: #5b6270;
+  background-size: cover;
+  border-radius: 30px;
+  margin: 15px auto;
+  cursor: pointer;
+}
+
+.layout-ceiling-main a{
+  color: #9ba7b5;
+}
+
+.ivu-row-flex {
+  height: 100%;
+}
+
+.layout-header{
+  width: 100%;
+  height: 50px;
+  background: #fff;
+  border-bottom: 2px solid #e5e5e5;
+  padding: 0 100px 0 20px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  line-height: 50px;
+}
+
+.sign-out {
+  width: 100%;
+  height: 35px;
+  position: absolute;
+  bottom: 0px;
+  text-align: center;
+  line-height: 35px;
+  word-break: break-word;
+  background: #333;
+  color: hsla(0,0%,100%,.7);
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.sign-out:hover {
+  background: rgba(255,255,255,0.2);
+  color: hsla(0,0%,100%,1);
+}

@@ -26,6 +26,14 @@ module.exports = {
                                 css: ExtractTextPlugin.extract({
                                     use: ['css-loader', 'autoprefixer-loader', 'less-loader'],
                                     fallback: 'vue-style-loader'
+                                }),
+                                scss: ExtractTextPlugin.extract({
+                                    use: ['css-loader?minimize', 'autoprefixer-loader', 'sass-loader'],
+                                    fallback: 'vue-style-loader'
+                                }),
+                                sass: ExtractTextPlugin.extract({
+                                    use: ['css-loader?minimize', 'autoprefixer-loader', 'sass-loader'],
+                                    fallback: 'vue-style-loader'
                                 })
                             }
                         }
@@ -68,6 +76,9 @@ module.exports = {
             {
                 test: /\.(html|tpl)$/,
                 loader: 'html-loader'
+            },
+            {
+
             }
         ]
     },
@@ -76,7 +87,8 @@ module.exports = {
         alias: {
             'vue': 'vue/dist/vue.esm.js',
             'config': path.resolve(__dirname, './src/config'),
-            'api': path.resolve(__dirname, './src/api')
+            'api': path.resolve(__dirname, './src/api'),
+            '@src': path.resolve(__dirname,'./src')
         }
     }
 };

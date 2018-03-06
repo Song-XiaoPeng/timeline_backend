@@ -15,16 +15,42 @@ const RouterConfig = {
 };
 const router = new VueRouter(RouterConfig);
 
+// router.beforeEach((to, from, next) => {
+//     iView.LoadingBar.start();
+//     Util.title(to.meta.title);
+//     next();
+// });
+
+// router.afterEach((to, from, next) => {
+//     iView.LoadingBar.finish();
+//     window.scrollTo(0, 0);
+// });
+
 router.beforeEach((to, from, next) => {
+    // alert(localStorage.getItem('userInfo'))
+    // console.log(from)// /
+    // console.log(to)///login
+    // if (localStorage.getItem('userInfo') === null && to.path !== '/' && to.path !== '/resetPassword') {
+    // //   if (to.query.account_number !== undefined && to.query.password !== undefined) {
+    // //     next({ path: '/login' , query: { account_number: to.query.account_number, password: to.query.password }});
+    // //   } else {
+    //     next({ path: '/login' });
+    // //   }
+    // }
+    if(localStorage.getItem('userInfo') === null && to.path !== '/login'){
+        next({ path: '/login' })
+    }
+    
     iView.LoadingBar.start();
     Util.title(to.meta.title);
     next();
-});
-
-router.afterEach((to, from, next) => {
+  });
+  
+  router.afterEach(() => {
     iView.LoadingBar.finish();
     window.scrollTo(0, 0);
-});
+  });
+  
 
 new Vue({
     el: '#app',

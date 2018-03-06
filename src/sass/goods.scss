@@ -1,0 +1,103 @@
+@import 'variables';
+
+#index {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+
+section{
+  padding: 10px;
+  background-color: #fff;
+}
+
+.tab-container{
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+}
+
+.top-radius{
+  padding: 10px;
+}
+
+.tab-content{
+  padding: 6px 0;
+}
+
+table{
+  border-collapse:collapse;
+  width: 100%;
+}
+
+table, td, th{
+  border:1px solid #eaeaea;
+  text-align: center;
+  height: 45px;
+}
+
+.del{
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.del:hover{
+  color:  #dc486f;
+}
+
+section{
+  padding: 10px;
+}
+
+.top-content{
+   background-color: #fff;
+   padding: 10px;
+   display: -webkit-box;
+}
+
+.table-content{
+  background-color: #fff;
+}
+
+table{
+  border-collapse:collapse;
+  width: 100%;
+}
+
+table, td, th{
+  border:1px solid #eaeaea;
+  text-align: center;
+  height: 45px;
+}
+
+img{
+   height: 45px;
+   width: 45px;
+}
+
+.del{
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.del:hover{
+  color:  #dc486f;
+}
+
+.btn-box{
+  padding: 10px;
+  background-color: #fff;
+  button{
+    margin: 0 6px;
+  }
+}
+
+.rectangleImg{
+  width: 690px;
+  height: 400px;
+}
+
+.quadrateleImg{
+  width: 330px;
+  height:330px;
+}

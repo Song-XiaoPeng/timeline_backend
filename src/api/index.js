@@ -1,9 +1,25 @@
-import axios from 'axios'
+import util from '@src/libs/util'
 
+let request = util.axiosInstance
 let ajax = {}
 
+
+ajax.login = function(obj){
+  request.post('time_line/doLogin',obj.data)
+  .then(function(res){
+      if(res.data.code === 0){
+        obj.success(res.data.data)
+      }else{
+        obj.error(res.data.msg)
+      }
+  })
+  .catch(function(error){
+    console.log(error)
+  })
+}
+
 ajax.getTimelineList = function(obj){
-  axios.get('http://sone.timeline.hellobirds.top/time_line/getTimeLineList',{
+  request.get('time_line/getTimeLineList',{
     params: obj.data
   })
   .then(function(res){
@@ -19,7 +35,7 @@ ajax.getTimelineList = function(obj){
 }
 
 ajax.getTimelineDetail = function(obj){
-  axios.get('http://sone.timeline.hellobirds.top/time_line/getTimeLineDetail',{
+  request.get('time_line/getTimeLineDetail',{
     params: obj.data
   })
   .then(function(res){
@@ -34,4 +50,31 @@ ajax.getTimelineDetail = function(obj){
   })
 }
 
+ajax.setTimeLine = function(obj){
+  request.post('time_line/setTimeLine',obj.data)
+  .then(function(res){
+      if(res.data.code === 0){
+        obj.success(res.data.data)
+      }else{
+        obj.error(res.data.msg)
+      }
+  })
+  .catch(function(error){
+    console.log(error)
+  })
+}
+
+ajax.delTimeLine = function(obj){
+  request.post('time_line/delTimeLine',obj.data)
+  .then(function(res){
+      if(res.data.code === 0){
+        obj.success(res.data.data)
+      }else{
+        obj.error(res.data.msg)
+      }
+  })
+  .catch(function(error){
+    console.log(error)
+  })
+}
 export default ajax

@@ -24,12 +24,12 @@ let menu = [
         breadcrumb:["内容管理","添加文章"]
     },
     {
-        title: "用户留存",
+        title: "首页",
         icon:"heart",
         // name:"1.0.3",
-        groupName:"1",
+        groupName:"index",
         route: "/index",
-        breadcrumb:["统计分析","用户留存"]
+        breadcrumb:["首页"]
     },
     {
         title: "流失用户",
@@ -42,6 +42,10 @@ let menu = [
 ]
 
 let groupMenu = [
+    {
+        title: "首页",
+        name: "index"
+    },
     {
         title: "内容管理",
         name:"0",

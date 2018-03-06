@@ -1,11 +1,27 @@
 const routers = [
     {
         path: '/',
-        redirect: '/index',
+        redirect: '/login',
         meta: {
             title: ''
         },
         component: (resolve) => require(['./views/index.vue'], resolve)
+    },
+    {
+      path: '/login',
+      name: 'login',
+      meta: {
+          title: '登录'
+      },
+      component: (resolve) => require(['@src/views/user/login.vue'], resolve)
+    },
+    {
+      path: '/resetPassword',
+      name: 'resetPassword',
+      meta: {
+          title: '登录'
+      },
+      component: (resolve) => require(['@src/views/user/resetPassword.vue'], resolve)
     },
     {
       path: '/index',

@@ -35,6 +35,9 @@
             <Sider collapsible :collapsed-width="78" v-model="isCollapsed">
                 <div><h2 style="color:red;text-align:center;line-height:64px;height:64px;background-color:blue;">@sone时光机后台</h2></div>
                 <myMenu :class="menuitemClasses" mywidth="auto" :activitymenu="activityName"></myMenu>
+                <div class="sign-out" @click="logout()" style="color:white;margin-top:450px;padding-left:24px;cursor:pointer;">
+                    <Icon type="power"></Icon> 退出系统
+                </div>
             </Sider>
             <Layout>
                 <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}"></Header>
@@ -56,6 +59,7 @@
     import myMenu  from './components/menu'
     import bus from 'api/bus'
     import {menu as menuData} from 'config/menu'
+    import Cookie from 'js-cookie'
 
     export default {
         data () {
@@ -79,6 +83,20 @@
                         break
                     }
                 }
+            },
+            logout() {
+                Cookie.remove('uid')
+                window.localStorage.removeItem('userInfo')
+                this.$router.push('/login')
+            },
+            activityName2Breadcrumb(name){
+                for(let i=0;i<this.menuData.length;i++){
+                    if(this.menuData[i].route == name){
+                        this.activityName = i
+                        this.breadcrumb = this.menuData[i]['breadcrumb']
+                        break
+                    }
+                }
             }
         },
         components:{
@@ -95,10 +113,19 @@
         created(){
             this.initmenu();
         },
+        watch:{
+            activityName(newVal,oldVal){
+
+            }
+        },
         mounted() {
             let that = this
             bus.$on('getBreadcrumb',function(name){                
                 that.breadcrumb = name
+            })
+
+            bus.$on('activityNameChange',function(name){
+                that.activityName2Breadcrumb(name)
             })
         }
     }

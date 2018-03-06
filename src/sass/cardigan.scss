@@ -1,0 +1,423 @@
+@import 'variables';
+
+#index {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+
+.centent-padding {
+  padding: 5px;
+}
+
+.l-box{
+  background-color: #fff;
+  height: 100%;
+}
+
+.r-box{
+  background-color: #fff;
+  height: 100%;
+  border-left: 10px #f8f8f9 solid;
+}
+
+.name-box{
+   text-align: center;
+   height: 80px;
+  line-height: 80px;
+   font-size: 20px;
+   font-weight: bold;
+}
+
+.xinxi{
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  font-size: 16px;
+  color: #999;
+  background-color: #f8f8f9;
+  .wire{
+    display: inline-block;
+    height: 1px;
+    background-color: #eaeaea;
+    width: 30%;
+    position: relative;
+    top: -5px;
+  }
+}
+
+.order-list-box{
+  padding: 10px;
+  .list{
+    padding: 5px 0;
+    border-bottom: 1px #eaeaea dashed;
+    .r{
+      color: #ccc;
+    }
+  }
+}
+
+.calculator{
+  width: 390px;
+  display: inline-block;
+  overflow: hidden;
+  zoom: 1;
+  margin-left: 20px;
+  .strip{
+    //float: left;
+    display: inline-block;
+    width: 96px;
+    vertical-align: top;
+    .item{
+      width: 78px;
+      height: 78px;
+      line-height: 78px;
+      text-align: center;
+      color: #333;
+      font-size: 32px;
+      background: #fafafa;
+      border: 1px solid #c7c7c7;
+      cursor: pointer;
+      margin-top: 16px;
+      transition: all .3s;
+    }
+
+    .bt{
+      height: 174px;
+      line-height: 174px;
+      color: #fff;
+      font-size: 24px;
+      border: 1px solid #f5a623;
+      margin-top: 16px;
+      background-color: #e84c75;
+      width: 78px;
+      cursor: pointer;
+      transition: all .3s;
+    }
+  }
+}
+
+.calculator .strip .bt:hover{
+  background-color: #f5a623;
+  color: #fff;
+}
+
+.calculator .strip .item:hover{
+  background-color: #2d8cf0;
+  color: #fff;
+}
+
+.input-warp {
+  position: relative;
+  width: 368px;
+  height: 62px;
+  border: 1px solid #e84c75;
+  display: inline-block;
+  margin-top: 28px;
+  color: #999;
+  font-size: 12px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0 15px;
+ margin-left: 20px;
+}
+
+.input-warp .f-l {
+  float: left;
+}
+
+.input-warp span {
+  display: inline-block;
+  line-height: 58px;
+}
+
+.input-warp .input-adv {
+  margin-left: 6px;
+  position: relative;
+  display: inline-block;
+  color: #333;
+  line-height: 58px;
+  font-size: 28px;
+}
+
+.input-warp .input-adv span {
+  position: absolute;
+  left: 0;
+}
+
+.input-warp span {
+  display: inline-block;
+  line-height: 58px;
+}
+
+.input-warp .input-adv input {
+  float: left;
+  width: 100%;
+  outline: none;
+  border: none;
+  width: 208px;
+  height: 58px;
+  line-height: 58px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding-left: 36px;
+  font-size: 24px;
+}
+
+.input-warp .text-r {
+  margin-top: 22px;
+  font-size: 12px;
+  line-height: 20px;
+  float: right;
+}
+
+.input-warp span {
+  display: inline-block;
+  line-height: 58px;
+}
+
+.pclog {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background: $registerLoginBgColor;
+  background-size: 100% 100%;
+  position: fixed;
+}
+
+.pclog-mian {
+  width: 400px;
+  margin: 5% auto 0px auto;
+  background: #2C2C29;
+  padding: 20px 60px;
+  border-radius: 10px;
+}
+
+.sign-title {
+  font-size: 26px;
+  color: #fff;
+}
+
+.form-region {
+  color: #fff;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.from-title {
+  display: inline-block;
+}
+
+.from-input {
+  display: inline-block;
+}
+
+.from-input input {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  color: #fff;
+  border-bottom: 1px solid #dddee1;
+  letter-spacing: 2px;
+}
+
+.but{
+  font-size: 20px;
+  width: 200px;
+  border-radius: 20px;
+  border: 1px solid #fff;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  outline: none;
+  color: #fff;
+  background-color: transparent;
+}
+
+.but:hover{
+  color: #ff4f4f;
+  background-color: #fff;
+  border: 1px solid #fff;
+  cursor: pointer;
+}
+
+.copyright {
+  width: 1000px;
+  margin: 0px auto;
+  font-size: 12px;
+  color: #fff;
+  opacity: 0.7;
+  text-align: center;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  margin-left: -500px;
+}
+
+.getCodeBut{
+  position:absolute;
+  top: 0;
+  right: 0;
+  width: 75px;
+  height: 20px;
+  font-size: 12px;
+  border: 0px;
+  background: #fff;
+}
+
+.crumbs{
+  background-color: #fff;
+  height: 50px;
+  line-height: 50px;
+
+  span{
+    margin: 0 5px;
+    font-size: 14px;
+  }
+
+  span:last-child{
+    font-weight: bold;
+  }
+}
+
+.content{
+  .sel{
+    border-radius: 4px;
+    height: 50px;
+    background-color: #e84c75;
+
+    .radius{
+      position: relative;
+      top:50%;
+      margin-top: -5px;
+      margin-left: 10px;
+      color: #ffffff;
+    }
+
+    .seek{
+      top:50%;
+      margin-top: -7px;
+      margin-left: 10px;
+    }
+
+    .addBtn{
+      position: relative;
+      top:50%;
+      margin-top: -7px;
+      margin-left: 10px;
+      color: #ffffff;
+    }
+   
+    .addBtn:hover{
+      color: #f1f0f0;
+    }
+
+    .array {
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
+
+  .table-content{
+    padding: 10px;
+    background-color: #f7f7f7;
+  }
+}
+
+.table-content {
+  background-color: #fff;
+}
+
+table {
+  border-collapse:collapse;
+  width: 100%;
+}
+
+table, td, th {
+  border:1px solid #eaeaea;
+  text-align: center;
+  height: 45px;
+}
+
+.sum-txt{
+  border: 1px #dc486f solid;
+  cursor: default;
+}
+
+.sum-txt:hover{
+  color: #495060;
+}
+
+.del{
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.del:hover{
+  color:  #dc486f;
+}
+
+.gathering{
+  padding: 10px 0;
+}
+
+.gathering .r{
+   float: right;
+}
+
+.gathering .r .txt{
+  margin: 0 10px;
+}
+
+.gathering .r button{
+  margin: 0 10px;
+}
+
+.total-box{
+  height: 40px;
+  width: 500px;
+  line-height: 40px;
+  float: right;
+  text-align: right;
+}
+
+.item-val{
+  padding: 2px 5px;
+  border: 1px #eaeaea solid;
+  border-radius: 4px;
+  margin: 0 2px;
+}
+
+.user-content{
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #fff;
+  width: 610px;
+  height: 120px;
+  border: 1px #eaeaea solid;
+
+  div{
+    width: 80px;
+    height: 80px;
+    float: left;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-top: 10px;
+    img{
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  ul{
+    float: left;
+    width: 500px;
+    height: 100px;
+    li{
+      float: left;
+      width: 50%;
+      height: 50px;
+      line-height: 50px;
+    }
+  }
+}

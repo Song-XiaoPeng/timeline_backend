@@ -1,0 +1,70 @@
+/**
+ * 获取img文件绝对路径
+ * 调用方法 img('img.png') 表示url为 /static/images/img.png的文件，
+ * 如果不调用该方法，也可以直接使用'~img/img.png'(需要写在css中，无法再内联style中使用)
+ * @param  {String} $fileName 图片名称
+ * @return {String}      [文件的绝对路径]
+ */
+@function img($fileName) {
+  @return "/static/images/" + $fileName
+}
+
+/*************颜色值**************/
+$titleBgColor: #3399ff;  // 导航栏背景颜色
+$registerLoginBgColor: #313031;  // 注册登录页背景颜色
+$frameBgColor: #fff;  // 方框元素颜色
+
+//清除浮动
+.clear{
+  clear:both;
+}
+
+//去除浏览器input number上下箭头
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none !important;
+	margin: 0; 
+}
+
+//样式重置
+ul {
+  list-style: none;
+}
+
+.border-padding {
+  padding: 5px;
+}
+
+.page-centent {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0
+}
+
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+
+.slide-fade-leave-active {
+  transition: all .3s ease;
+}
+
+.slide-fade-enter, .slide-fade-leave-to {
+  transform: translateX(-10px);
+  opacity: 0;
+}
+
+#index {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
