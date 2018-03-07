@@ -34,7 +34,7 @@
         <Layout :style="{minHeight: '100vh'}">
             <Sider collapsible :collapsed-width="78" v-model="isCollapsed">
                 <div><h2 style="color:red;text-align:center;line-height:64px;height:64px;background-color:blue;">@sone时光机后台</h2></div>
-                <myMenu :class="menuitemClasses" mywidth="auto" :activitymenu="activityName"></myMenu>
+                <myMenu :class="menuitemClasses" mywidth="auto" :activitymenu="nowActivityName"></myMenu>
                 <div class="sign-out" @click="logout()" style="color:white;margin-top:450px;padding-left:24px;cursor:pointer;">
                     <Icon type="power"></Icon> 退出系统
                 </div>
@@ -43,7 +43,7 @@
                 <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}"></Header>
                 <Content :style="{padding: '0 16px 16px'}">
                     <Breadcrumb :style="{margin: '16px 0'}">
-                        <BreadcrumbItem v-for="(item,key) in breadcrumb" :key="key">{{item}}</BreadcrumbItem>
+                        <BreadcrumbItem v-for="(item,key) in nowbreadcrumb" :key="key">{{item}}</BreadcrumbItem>
                     </Breadcrumb>
                     <Card>
                         <div style="">
@@ -79,7 +79,9 @@
                 for(let i=0;i<this.menuData.length;i++){
                     if(this.menuData[i].route == url){
                         this.activityName = i
+                        this.$store.state.app.activityName = i
                         this.breadcrumb = this.menuData[i]['breadcrumb']
+                        this.$store.state.app.breadcrumb = this.menuData[i]['breadcrumb']
                         break
                     }
                 }
@@ -110,6 +112,12 @@
                     'menu-item',
                     this.isCollapsed ? 'collapsed-menu' : ''
                 ]
+            },
+            nowbreadcrumb(){
+                return this.$store.state.app.breadcrumb
+            },
+            nowActivityName() {
+                return this.$store.state.app.activityName
             }
         },
         created(){
@@ -122,15 +130,15 @@
         },
         mounted() {
             let that = this
-            bus.$on('getBreadcrumb',function(name){    
-                let sunMenu = that.menuData[name]
-                that.activityName = name
-                that.breadcrumb = sunMenu.breadcrumb
-            })
+            // bus.$on('getBreadcrumb',function(name){    
+            //     let sunMenu = that.menuData[name]
+            //     that.activityName = name
+            //     that.breadcrumb = sunMenu.breadcrumb
+            // })
 
-            bus.$on('activityNameChange',function(name){
-                that.activityName2Breadcrumb(name)
-            })
+            // bus.$on('activityNameChange',function(name){
+            //     that.activityName2Breadcrumb(name)
+            // })
         }
     }
 </script>

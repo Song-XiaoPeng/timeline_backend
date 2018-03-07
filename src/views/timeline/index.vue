@@ -15,6 +15,7 @@
 <script>
     import ajax from '../../api/index'
     import bus from 'api/bus'
+    import {menu as menuData} from 'config/menu'
 
     export default {
         data () {
@@ -25,7 +26,8 @@
                 loading:true,
                 timelineList:[],
                 columns:[],
-                confirmDel: false
+                confirmDel: false,
+                menuData
             }
         },
         components:{
@@ -197,7 +199,9 @@
                           on: {
                             click: () => {
                               // that.$router.push({ name: 'setTimeline', params: { id: 1 }}) //带params /index/:id
-                              bus.$emit('activityNameChange',1)
+                              // bus.$emit('activityNameChange',1)
+                              that.$store.dispatch('changeActivityName', {name: 1})
+                              that.$store.dispatch('changeBreadcrumb', {name: that.menuData[1].breadcrumb })
                               that.$router.push({ name: 'setTimeline', query: { id: that.timelineList[index].id }}) //带查询参数 /index?id=1
                               // that.$route.path
                               // that.getTimelineDetail(that.timelineList[index].id)

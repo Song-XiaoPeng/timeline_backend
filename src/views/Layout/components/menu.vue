@@ -31,7 +31,9 @@
         methods:{
            menuSelected(name) {
             //    let strArr = name.split('.')
-               bus.$emit('getBreadcrumb',name)
+            //    bus.$emit('getBreadcrumb',name)
+               this.$store.dispatch('changeBreadcrumb',{name: this.menuData[name].breadcrumb})
+               this.$store.dispatch('changeActivityName',{name: name})
                let sunMenu = this.menuData[name]
                this.$router.push(sunMenu.route)
            } 
