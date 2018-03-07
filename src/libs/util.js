@@ -14,13 +14,13 @@ util.ajaxBaseUrl = env === "development" ? "http://timemachine.com/" : "http://s
 util.axiosInstance = axios.create({
     baseURL: util.ajaxBaseUrl,
     timeout: 30000,
-    // headers: {'X-Custom-Header': 'accesstoken'}
+    // headers: {'access_token': 'accesstoken'}
   });
   
   // Add a request interceptor
-  axios.interceptors.request.use(function (config) {
+  util.axiosInstance.interceptors.request.use(function (config) {
     // Do something before request is sent
-    config.headers.accesstoken = JSON.parse(localStorage.getItem('userInfo')) === null ? null : JSON.parse(localStorage.getItem('userInfo')).accesstoken;
+    config.headers['access-token'] = JSON.parse(localStorage.getItem('userInfo')) === null ? null : JSON.parse(localStorage.getItem('userInfo')).access_token;
     return config;
   }, function (error) {
     // Do something with request error
@@ -28,7 +28,7 @@ util.axiosInstance = axios.create({
   });
   
   // Add a response interceptor
-  axios.interceptors.response.use(function (response) {
+  util.axiosInstance.interceptors.response.use(function (response) {
     // Do something with response data
     if (response.data.code === 6001) {//登录失败
         window.localStorage.removeItem('userInfo');
@@ -39,5 +39,4 @@ util.axiosInstance = axios.create({
     // Do something with response error
     return Promise.reject(error);
   });
-console.log(1)
 export default util;

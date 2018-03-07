@@ -5,7 +5,7 @@ let ajax = {}
 
 
 ajax.login = function(obj){
-  request.post('time_line/doLogin',obj.data)
+  request.post('time_line/doLoginBackend',obj.data)
   .then(function(res){
       if(res.data.code === 0){
         obj.success(res.data.data)

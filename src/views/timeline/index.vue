@@ -197,7 +197,7 @@
                           on: {
                             click: () => {
                               // that.$router.push({ name: 'setTimeline', params: { id: 1 }}) //带params /index/:id
-                              bus.$emit('activityNameChange','/index/setTimeline')
+                              bus.$emit('activityNameChange',1)
                               that.$router.push({ name: 'setTimeline', query: { id: that.timelineList[index].id }}) //带查询参数 /index?id=1
                               // that.$route.path
                               // that.getTimelineDetail(that.timelineList[index].id)

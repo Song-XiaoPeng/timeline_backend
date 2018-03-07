@@ -65,7 +65,7 @@
         data () {
             return {
                 isCollapsed: false,
-                breadcrumb:[],
+                breadcrumb: [],
                 activityName: 0,
                 menuData
             };
@@ -90,13 +90,15 @@
                 this.$router.push('/login')
             },
             activityName2Breadcrumb(name){
-                for(let i=0;i<this.menuData.length;i++){
-                    if(this.menuData[i].route == name){
-                        this.activityName = i
-                        this.breadcrumb = this.menuData[i]['breadcrumb']
-                        break
-                    }
-                }
+                this.activityName = name
+                this.breadcrumb = this.menuData[name].breadcrumb
+                // for(var i=0;i<this.menuData.length;i++){
+                //     if(this.menuData[i].route === name){
+                //         this.activityName = i
+                //         this.breadcrumb = this.menuData[i].breadcrumb
+                //         break
+                //     }
+                // }
             }
         },
         components:{
@@ -120,8 +122,10 @@
         },
         mounted() {
             let that = this
-            bus.$on('getBreadcrumb',function(name){                
-                that.breadcrumb = name
+            bus.$on('getBreadcrumb',function(name){    
+                let sunMenu = that.menuData[name]
+                that.activityName = name
+                that.breadcrumb = sunMenu.breadcrumb
             })
 
             bus.$on('activityNameChange',function(name){

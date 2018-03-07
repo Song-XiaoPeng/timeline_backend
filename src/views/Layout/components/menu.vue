@@ -31,8 +31,8 @@
         methods:{
            menuSelected(name) {
             //    let strArr = name.split('.')
+               bus.$emit('getBreadcrumb',name)
                let sunMenu = this.menuData[name]
-               bus.$emit('getBreadcrumb',sunMenu.breadcrumb)
                this.$router.push(sunMenu.route)
            } 
         },
