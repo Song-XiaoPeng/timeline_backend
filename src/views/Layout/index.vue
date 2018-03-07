@@ -28,14 +28,34 @@
         vertical-align: middle;
         font-size: 22px;
     }
+    h3 {
+        text-align: center;
+        font-size: 21px;
+        font-weight: 300;
+        height: 64px;
+        line-height: 64px;
+        color: #ECEFF1;
+    }
 </style>
 <template>
     <div class="layout">
         <Layout :style="{minHeight: '100vh'}">
             <Sider collapsible :collapsed-width="78" v-model="isCollapsed">
-                <div><h2 style="color:red;text-align:center;line-height:64px;height:64px;background-color:blue;">@sone时光机后台</h2></div>
-                <myMenu :class="menuitemClasses" mywidth="auto" :activitymenu="nowActivityName"></myMenu>
-                <div class="sign-out" @click="logout()" style="color:white;margin-top:450px;padding-left:24px;cursor:pointer;">
+                <div><h3>@sone时光机</h3></div>
+                <!-- <myMenu :class="menuitemClasses" mywidth="auto" :activitymenu="nowActivityName"></myMenu> -->
+                <Menu width="mywidth" ref="menu" :theme="theme3" :active-name="nowActivityName" @on-select="menuSelected" @on-open-change="menuOpenChange">
+                    <template v-for="item in menuGroup">
+                        <MenuGroup :title="item.title">
+                            <template v-for="(item1,key) in menuData" v-if="item.name === item1.groupName">
+                                <MenuItem :name="key">
+                                    <Icon :type="item1.icon"></Icon>
+                                    <span v-if="isSeen">{{ item1.title }}</span>
+                                </MenuItem>
+                            </template>
+                        </MenuGroup>
+                    </template>
+                </Menu>
+                <div class="sign-out" @click="logout()" style="color:white;margin-top:450px;padding-left:68px;cursor:pointer;font-size:12px">
                     <Icon type="power"></Icon> 退出系统
                 </div>
             </Sider>
@@ -58,22 +78,38 @@
 <script>
     import myMenu  from './components/menu'
     import bus from 'api/bus'
-    import {menu as menuData} from 'config/menu'
+    import {menu as menuData,groupMenu as menuGroup} from 'config/menu'
     import Cookie from 'js-cookie'
 
     export default {
         data () {
             return {
+                isSeen: true,
                 isCollapsed: false,
                 breadcrumb: [],
                 activityName: 0,
-                menuData
+                menuData,
+                theme3: 'dark',
+                menuGroup: menuGroup,
+                breadcrumb:''
             };
         },
         beforeRouteUpdate (to,from,next){
             next()
         } ,
         methods :{
+            menuOpenChange() {
+                alert(this.isSeen)
+                this.isSeen = this.isSeen ? false : true
+            },
+            menuSelected(name) {
+                //    let strArr = name.split('.')
+                //    bus.$emit('getBreadcrumb',name)
+                this.$store.dispatch('changeBreadcrumb',{name: this.menuData[name].breadcrumb})
+                this.$store.dispatch('changeActivityName',{name: name})
+                let sunMenu = this.menuData[name]
+                this.$router.push(sunMenu.route)
+            },
             initmenu() {
                 let url = window.location.pathname
                 for(let i=0;i<this.menuData.length;i++){

@@ -1,17 +1,17 @@
 <template>
    <div>
         <Menu width="mywidth" ref="menu" :theme="theme3" :active-name="activitymenu" @on-select="menuSelected">
-        <div v-for="item in menuGroup">
-            <MenuGroup :title="item.title">
-                <div v-for="(item1,key) in menuData" v-if="item.name === item1.groupName">
-                    <MenuItem :name="key">
-                        <Icon :type="item1.icon"></Icon>
-                        {{ item1.title }}
-                    </MenuItem>
-                </div>
-            </MenuGroup>
-        </div>
-    </Menu>
+            <div v-for="item in menuGroup">
+                <MenuGroup :title="item.title">
+                    <div v-for="(item1,key) in menuData" v-if="item.name === item1.groupName">
+                        <MenuItem :name="key">
+                            <Icon :type="item1.icon"></Icon>
+                            {{ item1.title }}
+                        </MenuItem>
+                    </div>
+                </MenuGroup>
+            </div>
+        </Menu>
    </div>
 </template>
 <script>
