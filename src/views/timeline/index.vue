@@ -31,9 +31,9 @@
             }
         },
         components:{
-          'sone':{
-            functional:true,
-            render:function(h,params){
+          'sone': {
+            functional: true,
+            render: function(h,params){
               return h('div',[
                 h('Button',{
                   props:{

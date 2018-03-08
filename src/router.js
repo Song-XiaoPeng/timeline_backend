@@ -57,6 +57,22 @@ const routers = [
             title: 'setTimeline'
           },
           component:  (resolve) => require(['./views/timeline/detail.vue'], resolve)
+        },
+        {
+          path: 'setProfile',
+          name: 'setProfile',
+          meta: {
+            title: 'setProfile'
+          },
+          component:  (resolve) => require(['./views/user/setProfile.vue'], resolve)
+        },
+        {
+          path: 'modifyPassword',
+          name: 'modifyPassword',
+          meta: {
+            title: 'modifyPassword'
+          },
+          component:  (resolve) => require(['./views/user/modifyPassword.vue'], resolve)
         }
       ]
     }

@@ -10,6 +10,7 @@ util.title = function (title) {
 };
 
 util.ajaxBaseUrl = env === "development" ? "http://timemachine.com/" : "http://sone.timeline.hellobirds.top/"
+util.uploadImgUrl = util.ajaxBaseUrl + "common/uploadImg"
 
 util.axiosInstance = axios.create({
     baseURL: util.ajaxBaseUrl,

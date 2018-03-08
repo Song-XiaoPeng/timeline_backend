@@ -80,11 +80,14 @@
           success(res){
             this.loginLoading = false;
             window.localStorage.setItem('userInfo',JSON.stringify(res))
-            Cookie.set('uid',res.id,{expires: 7})
+            that.$store.commit('changeUserInfo',res)
+            console.log(that.$store.state.user)
+            Cookie.set('uid',res.uid,{expires: 7})
             that.$Message.success('登录成功');
             that.$router.push('/index')
           },
           error(res){
+            this.loginLoading = false;
             that.$Message.error('账号密码错误');
           }
         })

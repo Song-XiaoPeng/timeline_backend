@@ -32,12 +32,20 @@ let menu = [
         breadcrumb:["首页"]
     },
     {
-        title: "流失用户",
+        title: "个人设置",
         icon:"heart-broken",
         // name:"1.1.4",
         groupName:"1",
-        route: "/index?a=1",
-        breadcrumb:["统计分析","流失用户"]                
+        route: "/index/setProfile",
+        breadcrumb:["用户管理","个人设置"]                
+    },
+    {
+        title: "修改密码",
+        icon:"heart-broken",
+        // name:"1.1.4",
+        groupName:"1",
+        route: "/index/modifyPassword",
+        breadcrumb:["用户管理","修改密码"]                
     }
 ]
 
@@ -51,8 +59,9 @@ let groupMenu = [
         name:"0",
     },
     {
-        title: "统计分析",
+        title: "用户管理",
         name:"1",
     }
+
 ]
 export {menu,groupMenu};

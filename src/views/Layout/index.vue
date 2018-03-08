@@ -36,11 +36,40 @@
         line-height: 64px;
         color: #ECEFF1;
     }
+    .sign-out {
+        position: absolute;
+        cursor: pointer;
+        font-size: 12px;
+        right: 20px;
+        top: 0px;
+    }
+    .avator{
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+        text-align: center;
+        line-height: 60px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 1px 1px rgba(0,0,0,.2);
+        position: absolute;
+        left: 100px;
+        top: 0px
+    }
+    .header{
+        position: relative;
+    }
+    .header p{
+        position: absolute;
+        left: 0
+    }
 </style>
 <template>
     <div class="layout">
         <Layout :style="{minHeight: '100vh'}">
-            <Sider collapsible :collapsed-width="78" v-model="isCollapsed">
+            <Sider :collapsed-width="78" v-model="isCollapsed" style="position: 'fixed'," on-collapse="">
                 <div><h3>@sone时光机</h3></div>
                 <!-- <myMenu :class="menuitemClasses" mywidth="auto" :activitymenu="nowActivityName"></myMenu> -->
                 <Menu width="mywidth" ref="menu" :theme="theme3" :active-name="nowActivityName" @on-select="menuSelected" @on-open-change="menuOpenChange">
@@ -55,12 +84,17 @@
                         </MenuGroup>
                     </template>
                 </Menu>
-                <div class="sign-out" @click="logout()" style="color:white;margin-top:450px;padding-left:68px;cursor:pointer;font-size:12px">
-                    <Icon type="power"></Icon> 退出系统
-                </div>
             </Sider>
             <Layout>
-                <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}"></Header>
+                <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}">
+                    <div class="header">
+                        <p> 欢迎，{{ nickname }}！</p>
+                        <img :src="avator" alt="" class="avator">
+                        <div class="sign-out" @click="logout()">
+                            <Icon type="power"></Icon> 退出系统
+                        </div>
+                    </div>
+                </Header>
                 <Content :style="{padding: '0 16px 16px'}">
                     <Breadcrumb :style="{margin: '16px 0'}">
                         <BreadcrumbItem v-for="(item,key) in nowbreadcrumb" :key="key">{{item}}</BreadcrumbItem>
@@ -80,6 +114,7 @@
     import bus from 'api/bus'
     import {menu as menuData,groupMenu as menuGroup} from 'config/menu'
     import Cookie from 'js-cookie'
+    import ajax from 'api'
 
     export default {
         data () {
@@ -91,10 +126,22 @@
                 menuData,
                 theme3: 'dark',
                 menuGroup: menuGroup,
-                breadcrumb:''
+                breadcrumb:'',
+                userInfo: []
             };
         },
         beforeRouteUpdate (to,from,next){
+            console.log(to)
+            console.log(from)
+            for(let i=0;i<this.menuData.length;i++){
+                if(this.menuData[i].route == to.path){
+                    this.activityName = i
+                    this.$store.state.app.activityName = i
+                    this.breadcrumb = this.menuData[i]['breadcrumb']
+                    this.$store.state.app.breadcrumb = this.menuData[i]['breadcrumb']
+                    break
+                }
+            }
             next()
         } ,
         methods :{
@@ -109,6 +156,9 @@
                 this.$store.dispatch('changeActivityName',{name: name})
                 let sunMenu = this.menuData[name]
                 this.$router.push(sunMenu.route)
+            },
+            switchMenu(to) {
+
             },
             initmenu() {
                 let url = window.location.pathname
@@ -126,6 +176,15 @@
                 Cookie.remove('uid')
                 window.localStorage.removeItem('userInfo')
                 this.$router.push('/login')
+            },
+            getUserInfo() {
+                var that = this
+                ajax.getProfile({
+                    data:{},
+                    success(res) {
+                        that.userInfo = res
+                    }
+                })
             },
             activityName2Breadcrumb(name){
                 this.activityName = name
@@ -154,9 +213,21 @@
             },
             nowActivityName() {
                 return this.$store.state.app.activityName
+            },
+            avator() {
+                return this.userInfo.img
+                // return this.$store.state.user.userInfo.avator
+            },
+            nickname() {
+                return this.userInfo.nickname
+                // return this.$store.state.user.userInfo.nickname
             }
         },
         created(){
+            this.getUserInfo()
+            // var userInfo = this.$store.state.user.userInfo
+            // console.log(this.$store.state)
+            // console.log(456456456)            
             this.initmenu();
         },
         watch:{
