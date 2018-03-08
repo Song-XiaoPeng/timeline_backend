@@ -21,19 +21,20 @@
         <FormItem label="天气" prop="weather">
             <Input v-model="formValidate.weather" placeholder="Enter your weather"></Input>
         </FormItem>    
-        <FormItem label="Date">
+        <FormItem label="日期">
             <Row>
                 <Col span="11">
                     <FormItem prop="date">
-                        <DatePicker type="date" @on-change="dateHandle" placeholder="Select date" v-model="datetime.date"></DatePicker>
+                        <!-- <DatePicker type="date" @on-change="dateHandle" placeholder="Select date" v-model="datetime.date"></DatePicker> -->
+                        <DatePicker @on-change="createTimeHandle" type="datetime" format="yyyy-MM-dd HH:mm:ss" placeholder="Select date and time(Excluding seconds)" v-model="datetime.create_time" style="width: 200px"></DatePicker>
                     </FormItem>
                 </Col>
-                <Col span="2" style="text-align: center">-</Col>
-                <Col span="11">
+                <!-- <Col span="2" style="text-align: center">-</Col> -->
+                <!-- <Col span="11">
                     <FormItem prop="time">
                         <TimePicker type="time" @on-change="timeHandle" placeholder="Select time" v-model="datetime.time"></TimePicker>
                     </FormItem>
-                </Col>
+                </Col> -->
             </Row>
         </FormItem>
           <FormItem label="是否可见" prop="status">
@@ -60,6 +61,7 @@
         data () {
             return {
                 datetime: {
+                    create_time:'',
                     date: '',
                     time: ''
                 },
@@ -75,6 +77,7 @@
                     title: '',
                     content:'',
                     mail: '',
+                    weather: '',
                     date: '',
                     time: '',
                     desc: '',
@@ -112,6 +115,9 @@
             timeHandle(time){
                 this.formValidate.time = time
             },
+            createTimeHandle(time){
+                this.formValidate.create_time = Date.parse(time) / 1000 //当修改时间时，将日期格式转变为时间戳
+            },
             handleSubmit (name) {
                 this.$refs[name].validate((valid) => {
                     if (valid) {
@@ -135,6 +141,8 @@
                         that.datetime.date = res.date
                         that.formValidate.status = String(that.formValidate.status)
                         that.datetime.time = res.time
+                        var oDate = new Date(res.create_time *1000)
+                        that.datetime.create_time = oDate.getFullYear()+" "+ (oDate.getMonth() + 1)+ " "+  oDate.getDate() +" "+ oDate.getHours() +" "+ oDate.getMinutes() //将时间戳转变为日期时间格式
                     },
                     error:function(res){
                         that.$Message.error(res);
@@ -159,7 +167,6 @@
         computed:{
             postData(){
                 let data = this.formValidate
-                data.date = Date.parse(data.date) / 1000
                 return data
             }
         },
@@ -167,6 +174,7 @@
             // console.log(this.$router.query) //返回undefined;注意，此处应该使用$route（路由信息对象：当前激活的路由的状态信息），而this.$router表示vue-router实例而不是当前的路由
             this.id = this.$route.query.id
             this.formValidate.id = this.$route.query.id
+            
             if(this.id > 0){
                 this.getTimelineDetail(this.id)
             }

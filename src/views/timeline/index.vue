@@ -109,7 +109,18 @@
                   {
                     title: '时间',
                     align: 'center',
-                    key: 'date'
+                    key: 'create_time',
+                    render: (h,obj) => {
+                      var oDate = new Date(obj.row.create_time*1000)
+                      var Y = oDate.getFullYear() + '-'
+                      var M = (oDate.getMonth() + 1 < 10 ? "0" + (oDate.getMonth() +1) : oDate.getMonth() +1) + '-'
+                      var D = (oDate.getDate() >= 10 ? oDate.getDate() : "0" + oDate.getDate()) + ' '
+                      var H = (oDate.getHours() >= 10 ? oDate.getHours() : "0" + oDate.getHours()) + ":"
+                      var I = (oDate.getMinutes() >=10 ?  oDate.getMinutes() : "0" + oDate.getMinutes()) + ":"
+                      var S = (oDate.getSeconds() >=10 ? oDate.getSeconds() : "0" + oDate.getSeconds())
+                      var createtime = Y+M+D+H+I+S
+                      return h('span',{},createtime)
+                    }
                   },
                   {
                     title: '状态',
