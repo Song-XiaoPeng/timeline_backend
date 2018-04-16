@@ -1,4 +1,4 @@
-import util from '@src/libs/util'
+import { util } from '@src/libs/util'
 
 let request = util.axiosInstance
 let ajax = {}
