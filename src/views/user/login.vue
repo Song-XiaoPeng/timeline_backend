@@ -1,7 +1,7 @@
 <style scoped lang="scss">
   @import "src/sass/register";
   .pclog{
-    background-image: url("../../static/images/login-bg.jpg");
+    background-image: url("../../static/images/login-bg1.jpg");
     background-size: 100% 100%;
     background-repeat: no-repeat;
   }

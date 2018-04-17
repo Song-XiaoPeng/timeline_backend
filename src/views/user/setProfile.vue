@@ -45,7 +45,7 @@
 <script>
 import ajax from 'api'
 import Cookie from 'js-cookie'
-import util from '@src/libs/util'
+import { util } from '@src/libs/util'
 
 export default {
     data() {

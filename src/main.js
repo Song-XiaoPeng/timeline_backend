@@ -2,11 +2,11 @@ import Vue from 'vue';
 import iView from 'iview';
 import VueRouter from 'vue-router';
 import Routers from './router';
-import Util from './libs/util';
+import { util } from './libs/util';
 import App from './app.vue';
 import store from './store' 
 import 'iview/dist/styles/iview.css';
-
+console.log(1)
 Vue.use(VueRouter);
 Vue.use(iView);
 // 路由配置
@@ -18,7 +18,7 @@ const router = new VueRouter(RouterConfig);
 
 // router.beforeEach((to, from, next) => {
 //     iView.LoadingBar.start();
-//     Util.title(to.meta.title);
+//     util.title(to.meta.title);
 //     next();
 // });
 
@@ -43,7 +43,7 @@ router.beforeEach((to, from, next) => {
     }
     
     iView.LoadingBar.start();
-    Util.title(to.meta.title);
+    util.title(to.meta.title);
     next();
   });
   
