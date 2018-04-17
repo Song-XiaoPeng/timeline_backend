@@ -2,6 +2,8 @@ import axios from 'axios'
 import env from 'config/env'
 
 export const STORAGE_TIME = 240;//分钟,storage过期时间
+export const USER_INFO_KEY = 'userInfo';//分钟,storage过期时间
+export const TOKEN_KEY = 'access-token';//分钟,storage过期时间
 
 let util = {
 
@@ -17,24 +19,25 @@ util.uploadImgUrl = util.ajaxBaseUrl + "common/uploadImg"
 util.axiosInstance = axios.create({
     baseURL: util.ajaxBaseUrl,
     timeout: 30000,
-    headers: {'access-token': fetchToken()}
+    headers: {'access-token': fetchToken(),'X-Requested-With': 'XMLHttpRequest'}
   });
   
   // Add a request interceptor
-  util.axiosInstance.interceptors.request.use(function (config) {
-    // Do something before request is sent
-    config.headers['access-token'] = JSON.parse(localStorage.getItem('userInfo')) === null ? null : JSON.parse(localStorage.getItem('userInfo')).access_token;
-    return config;
-  }, function (error) {
-    // Do something with request error
-    return Promise.reject(error);
-  });
+  // util.axiosInstance.interceptors.request.use(function (config) {
+  //   // Do something before request is sent
+  //   config.headers['access-token'] = JSON.parse(localStorage.getItem('userInfo')) === null ? null : JSON.parse(localStorage.getItem('userInfo')).access_token;
+  //   return config;
+  // }, function (error) {
+  //   // Do something with request error
+  //   return Promise.reject(error);
+  // });
   
   // Add a response interceptor
   util.axiosInstance.interceptors.response.use(function (response) {
     // Do something with response data
     if (response.data.code === 6001) {//登录失败
-        window.localStorage.removeItem('userInfo');
+        // window.localStorage.removeItem('userInfo');
+        delStorage('userInfo');
         window.location.href = 'http://' + window.location.host;
       }
     return response;

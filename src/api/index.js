@@ -137,4 +137,18 @@ ajax.resetPassword = function(obj){
     console.log(error)
   })
 }
+
+ajax.getCaptchaImg = (obj) => {
+    request.get('captcha')
+    .then(function(res){
+        if(res){
+            obj.success(res)
+        }else{
+            obj.error(res)
+        }
+    })
+    .catch(function(error){
+        console.log(error)
+    })
+}
 export default ajax

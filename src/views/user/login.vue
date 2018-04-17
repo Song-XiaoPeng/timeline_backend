@@ -55,10 +55,12 @@
   import TitleBar from '@src/components/TitleBar';
   import ajax from 'api'
   import Cookie from 'js-cookie'
+  import {setStorage,USER_INFO_KEY} from "../../libs/util";
 
   export default {
     data() {
       return {
+        captcha:'',
         nickname: '',
         password: '',
         loginLoading: false
@@ -68,6 +70,18 @@
       TitleBar
     },
     methods: {
+        getCaptchaImg(){
+            let that = this;
+            ajax.getCaptchaImg({
+            data:{},
+            success(res){
+                // that.captcha = res.data.image
+            },
+            error(res){
+                that.$Message.error('错误');
+            }
+        });
+      },
       login() {
         var that = this
         this.loginLoading = true
@@ -79,9 +93,9 @@
           },
           success(res){
             this.loginLoading = false;
-            window.localStorage.setItem('userInfo',JSON.stringify(res))
+            setStorage(USER_INFO_KEY,JSON.stringify(res))
+            // window.localStorage.setItem('userInfo',JSON.stringify(res))
             that.$store.commit('changeUserInfo',res)
-            console.log(that.$store.state.user)
             Cookie.set('uid',res.uid,{expires: 7})
             that.$Message.success('登录成功');
             that.$router.push('/index')
@@ -94,7 +108,7 @@
       }
     },
     created () {
-      
+        this.getCaptchaImg()
     }
   };
 </script>
